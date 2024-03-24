@@ -6,9 +6,9 @@ namespace InvoicesAPI.Repositories
 {
     public class CustomersRepository : ICustomersRepository
     {
-        private readonly CustomersContext _customersContext;
+        private readonly InvoicesContext _customersContext;
 
-        public CustomersRepository(CustomersContext customersContext)
+        public CustomersRepository(InvoicesContext customersContext)
         {
             _customersContext = customersContext;
         }
@@ -16,7 +16,7 @@ namespace InvoicesAPI.Repositories
         public void CreateCustomer(CreateCustomerRequest customerRequest)
         {
             var existingCustomer = _customersContext.Customers.FirstOrDefault(x => x.IdentityNumber == customerRequest.IdentityNumber);
-            if (existingCustomer is null)
+            if(existingCustomer is null)
             {
                 var customer = new Customer
                 {
@@ -34,7 +34,7 @@ namespace InvoicesAPI.Repositories
             }
             else
             {
-                throw new ArgumentException($"Customer already existis for IdentityNumber: {existingCustomer.IdentityNumber}");
+                throw new ArgumentException($"Customer already exists for IdentityNumber: {existingCustomer.IdentityNumber}");
             }
         }
 
