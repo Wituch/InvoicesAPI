@@ -13,7 +13,7 @@ namespace InvoicesAPI.Repositories
             _customersContext = customersContext;
         }
 
-        public void CreateCustomer(CreateCustomerRequest customerRequest)
+        public string CreateCustomer(CreateCustomerRequest customerRequest)
         {
             var existingCustomer = _customersContext.Customers.FirstOrDefault(x => x.IdentityNumber == customerRequest.IdentityNumber);
             if(existingCustomer is null)
@@ -31,6 +31,7 @@ namespace InvoicesAPI.Repositories
                 };
                 _customersContext.Customers.Add(customer);
                 _customersContext.SaveChanges();
+                return customer.CustomerId;
             }
             else
             {

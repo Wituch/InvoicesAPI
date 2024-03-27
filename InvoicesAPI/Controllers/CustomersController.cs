@@ -26,16 +26,17 @@ namespace InvoicesAPI.Controllers
         [HttpPost]
         public IResult Post([FromBody] CreateCustomerRequest customer)
         {
+            string customerId;
             try
             {
-                _customersRepository.CreateCustomer(customer);
+                customerId = _customersRepository.CreateCustomer(customer);
             }
             catch (Exception ex) 
             { 
                 return Results.BadRequest(ex.Message);
             }
 
-            return Results.Ok();
+            return Results.Ok(customerId);
         }
     }
 }
