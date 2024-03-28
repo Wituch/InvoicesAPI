@@ -62,7 +62,7 @@ namespace InvoicesAPI.BDD.StepDefinitions
         [Then("Response status code is (.*)")]
         public void ResponseStatusCodeIs(int statusCode)
         {
-            Assert.That(statusCode, Is.EqualTo((int)_apiResponseContext.LastApiResponse.StatusCode));
+            Assert.That((int)_apiResponseContext.LastApiResponse.StatusCode, Is.EqualTo(statusCode));
         }
 
         [StepDefinition("Following customers are saved in the database:")]

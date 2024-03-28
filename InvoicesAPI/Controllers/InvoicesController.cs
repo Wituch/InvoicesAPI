@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace InvoicesAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class InvoicesController
+    [Route("[controller]")] 
+    public class InvoicesController : ControllerBase
     {
         private readonly IInvoicesRepository _invoicesRepository;
 
@@ -16,14 +16,14 @@ namespace InvoicesAPI.Controllers
         }
 
         [HttpGet]
-        public IResult Get(string invoiceId)
+        public IActionResult Get(string invoiceId)
         {
             var result = _invoicesRepository.GetInvoice(invoiceId);
-            return result == null ? Results.NotFound() : Results.Ok(result);
+            return result == null ? NotFound() : Ok(result);
         }
 
         [HttpPost]
-        public IResult Post([FromBody] CreateInvoiceRequest invoice)
+        public IActionResult Post([FromBody] CreateInvoiceRequest invoice)
         {
             string invoiceId;
             try
@@ -32,10 +32,10 @@ namespace InvoicesAPI.Controllers
             }
             catch (Exception ex)
             {
-                return Results.BadRequest(ex.Message);
+                return BadRequest(ex.Message);
             }
 
-            return Results.Ok(invoiceId);
+            return Ok(invoiceId);
         }
     }
 }

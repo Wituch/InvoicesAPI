@@ -6,7 +6,7 @@ namespace InvoicesAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CustomersController
+    public class CustomersController : ControllerBase
     {
         private readonly ICustomersRepository _customersRepository;
 
@@ -16,14 +16,14 @@ namespace InvoicesAPI.Controllers
         }
 
         [HttpGet]
-        public IResult Get(string customerId)
+        public IActionResult Get(string customerId)
         {
             var result = _customersRepository.GetCustomer(customerId);
-            return result == null ? Results.NotFound() : Results.Ok(result);
+            return result == null ? NotFound() : Ok(result);
         }
 
         [HttpPost]
-        public IResult Post([FromBody] CreateCustomerRequest customer)
+        public IActionResult Post([FromBody] CreateCustomerRequest customer)
         {
             string customerId;
             try
@@ -32,10 +32,10 @@ namespace InvoicesAPI.Controllers
             }
             catch (Exception ex) 
             { 
-                return Results.BadRequest(ex.Message);
+                return BadRequest(ex.Message);
             }
 
-            return Results.Ok(customerId);
+            return Ok(customerId);
         }
     }
 }
