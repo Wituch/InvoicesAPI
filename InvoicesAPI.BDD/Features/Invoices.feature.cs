@@ -175,16 +175,30 @@ this.FeatureBackground();
  testRunner.When("Create invoice request is sent with following properties:", ((string)(null)), table8, "When ");
 #line hidden
 #line 23
- testRunner.Then("Last response status code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("Response status code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                             "InvoiceNumber",
                             "BuyerId",
-                            "RecipientId"});
+                            "RecipientId",
+                            "IssueDate",
+                            "DeliveryDate",
+                            "ItemDescription",
+                            "ItemQuantity",
+                            "ItemPrice",
+                            "TaxRate",
+                            "ItemValue"});
                 table9.AddRow(new string[] {
                             "1/2024",
                             string.Format("{0}", buyerId),
-                            string.Format("{0}", recipientId)});
+                            string.Format("{0}", recipientId),
+                            "03/03/2024",
+                            "03/03/2024",
+                            "Teleskop",
+                            "1",
+                            "350.0",
+                            "23",
+                            "350.0"});
 #line 24
  testRunner.And("Following invoices are saved in the database:", ((string)(null)), table9, "And ");
 #line hidden

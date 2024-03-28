@@ -16,7 +16,8 @@ Scenario: Create a customer
 	| Street         | Sowia       |
 	| City           | Poznań      |
 	| ZipCode        | 61-131      |
-	Then Following customers are saved in the database:
+	Then Response status code is 200
+	And Following customers are saved in the database:
 	| FirstName | LastName | IdentityNumber | StreetNumber | Street | City   | ZipCode |
 	| Jan       | Kowalski | 41121235715    | 6            | Sowia  | Poznań | 61-131  |
 	When Get customer request is sent with new customer id
@@ -33,7 +34,8 @@ Scenario: Try to create a customer with duplicated identity number
 	| Street         | Sowia       |
 	| City           | Poznań      |
 	| ZipCode        | 61-131      |
-	Then Following customers are saved in the database:
+	Then Response status code is 200
+	And Following customers are saved in the database:
 	| FirstName | LastName | IdentityNumber | StreetNumber | Street | City   | ZipCode |
 	| Jan       | Kowalski | 41121235715    | 6            | Sowia  | Poznań | 61-131  |
 	When Create customer request is sent with following properties:

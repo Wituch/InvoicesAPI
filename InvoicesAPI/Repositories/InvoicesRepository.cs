@@ -13,18 +13,15 @@ namespace InvoicesAPI.Repositories
             _invoicesContext = invoicesContext;
         }
 
-        public void CreateInvoice(CreateInvoiceRequest invoiceRequest)
+        public string CreateInvoice(CreateInvoiceRequest invoiceRequest)
         {
-            var existingInvoice = _invoicesContext.Invoices.FirstOrDefault(i => i.InvoiceNumber == invoiceRequest.InvoiceNumber);
-            if(existingInvoice is null)
+            if(_invoicesContext.Invoices.FirstOrDefault(i => i.InvoiceNumber == invoiceRequest.InvoiceNumber) is null)
             {
-                var buyer = _invoicesContext.Customers.FirstOrDefault(c => c.CustomerId == invoiceRequest.BuyerId);
-                if(buyer is null)
+                if(_invoicesContext.Customers.FirstOrDefault(c => c.CustomerId == invoiceRequest.BuyerId) is null)
                 {
                     throw new ArgumentException($"Buyer with id: {invoiceRequest.BuyerId} does not exists");
                 }
-                var receipient = _invoicesContext.Customers.FirstOrDefault(c => c.CustomerId == invoiceRequest.RecipientId);
-                if (receipient is null)
+                if (_invoicesContext.Customers.FirstOrDefault(c => c.CustomerId == invoiceRequest.RecipientId) is null)
                 {
                     throw new ArgumentException($"Recipient with id: {invoiceRequest.RecipientId} does not exists");
                 }
@@ -46,10 +43,11 @@ namespace InvoicesAPI.Repositories
 
                 _invoicesContext.Add(invoice);
                 _invoicesContext.SaveChanges();
+                return invoice.InvoiceId;
             }
             else
             {
-                throw new ArgumentException($"Invoice already exists for InvoiceNumber: {existingInvoice.InvoiceNumber}");
+                throw new ArgumentException($"Invoice already exists for InvoiceNumber: {invoiceRequest.InvoiceNumber}");
             }
         }
 

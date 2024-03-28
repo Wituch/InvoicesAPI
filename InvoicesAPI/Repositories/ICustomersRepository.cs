@@ -6,6 +6,6 @@ namespace InvoicesAPI.Repositories
     public interface ICustomersRepository
     {
         Customer GetCustomer(string id);
-        public string CreateCustomer(CreateCustomerRequest customerRequest);
+        string CreateCustomer(CreateCustomerRequest customerRequest);
     }
 }

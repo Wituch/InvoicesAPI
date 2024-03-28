@@ -1,5 +1,4 @@
-﻿using InvoicesAPI.Entities;
-using InvoicesAPI.Repositories;
+﻿using InvoicesAPI.Repositories;
 using InvoicesAPI.Requests;
 using Microsoft.AspNetCore.Mvc;
 

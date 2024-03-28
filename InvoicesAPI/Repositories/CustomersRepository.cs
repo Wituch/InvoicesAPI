@@ -15,8 +15,7 @@ namespace InvoicesAPI.Repositories
 
         public string CreateCustomer(CreateCustomerRequest customerRequest)
         {
-            var existingCustomer = _customersContext.Customers.FirstOrDefault(x => x.IdentityNumber == customerRequest.IdentityNumber);
-            if(existingCustomer is null)
+            if(_customersContext.Customers.FirstOrDefault(x => x.IdentityNumber == customerRequest.IdentityNumber) is null)
             {
                 var customer = new Customer
                 {
@@ -35,7 +34,7 @@ namespace InvoicesAPI.Repositories
             }
             else
             {
-                throw new ArgumentException($"Customer already exists for IdentityNumber: {existingCustomer.IdentityNumber}");
+                throw new ArgumentException($"Customer already exists for IdentityNumber: {customerRequest.IdentityNumber}");
             }
         }
 

@@ -1,7 +1,6 @@
 ﻿using InvoicesAPI.Repositories;
 using InvoicesAPI.Requests;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace InvoicesAPI.Controllers
 {
@@ -26,16 +25,17 @@ namespace InvoicesAPI.Controllers
         [HttpPost]
         public IResult Post([FromBody] CreateInvoiceRequest invoice)
         {
+            string invoiceId;
             try
             {
-                _invoicesRepository.CreateInvoice(invoice);
+                invoiceId = _invoicesRepository.CreateInvoice(invoice);
             }
             catch (Exception ex)
             {
                 return Results.BadRequest(ex.Message);
             }
 
-            return Results.Ok();
+            return Results.Ok(invoiceId);
         }
     }
 }

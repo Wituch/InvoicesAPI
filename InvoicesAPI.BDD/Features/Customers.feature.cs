@@ -151,6 +151,9 @@ this.ScenarioInitialize(scenarioInfo);
 #line 10
  testRunner.When("Create customer request is sent with following properties:", ((string)(null)), table1, "When ");
 #line hidden
+#line 19
+ testRunner.Then("Response status code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                             "FirstName",
                             "LastName",
@@ -167,13 +170,13 @@ this.ScenarioInitialize(scenarioInfo);
                             "Sowia",
                             "Poznań",
                             "61-131"});
-#line 19
- testRunner.Then("Following customers are saved in the database:", ((string)(null)), table2, "Then ");
-#line hidden
-#line 22
- testRunner.When("Get customer request is sent with new customer id", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 20
+ testRunner.And("Following customers are saved in the database:", ((string)(null)), table2, "And ");
 #line hidden
 #line 23
+ testRunner.When("Get customer request is sent with new customer id", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 24
  testRunner.Then("Response status code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -187,7 +190,7 @@ this.ScenarioInitialize(scenarioInfo);
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Try to create a customer with duplicated identity number", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 25
+#line 26
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -197,7 +200,7 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 26
+#line 27
  testRunner.Given("There are no customers in the database", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -224,8 +227,11 @@ this.ScenarioInitialize(scenarioInfo);
                 table3.AddRow(new string[] {
                             "ZipCode",
                             "61-131"});
-#line 27
+#line 28
  testRunner.When("Create customer request is sent with following properties:", ((string)(null)), table3, "When ");
+#line hidden
+#line 37
+ testRunner.Then("Response status code is 200", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "FirstName",
@@ -243,8 +249,8 @@ this.ScenarioInitialize(scenarioInfo);
                             "Sowia",
                             "Poznań",
                             "61-131"});
-#line 36
- testRunner.Then("Following customers are saved in the database:", ((string)(null)), table4, "Then ");
+#line 38
+ testRunner.And("Following customers are saved in the database:", ((string)(null)), table4, "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "Field",
@@ -270,10 +276,10 @@ this.ScenarioInitialize(scenarioInfo);
                 table5.AddRow(new string[] {
                             "ZipCode",
                             "60-000"});
-#line 39
+#line 41
  testRunner.When("Create customer request is sent with following properties:", ((string)(null)), table5, "When ");
 #line hidden
-#line 48
+#line 50
  testRunner.Then("Response status code is 400", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -292,7 +298,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "Sowia",
                             "Poznań",
                             "61-131"});
-#line 49
+#line 51
  testRunner.And("Following customers are saved in the database:", ((string)(null)), table6, "And ");
 #line hidden
             }

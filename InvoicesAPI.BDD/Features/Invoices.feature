@@ -20,10 +20,10 @@ Scenario Outline: Create an invoice
 		| ItemPrice       | 350.0         |
 		| TaxRate         | 23            |
 		| ItemValue       | 350.0         |
-	Then Last response status code is 200
+	Then Response status code is 200
 	And Following invoices are saved in the database:
-	| InvoiceNumber | BuyerId   | RecipientId   |
-	| 1/2024        | <buyerId> | <recipientId> |
+	| InvoiceNumber | BuyerId   | RecipientId   | IssueDate  | DeliveryDate | ItemDescription | ItemQuantity | ItemPrice | TaxRate | ItemValue |
+	| 1/2024        | <buyerId> | <recipientId> | 03/03/2024 | 03/03/2024   | Teleskop        | 1            | 350.0     | 23      | 350.0     |
 
 Examples: 
 | buyerId                              | recipientId                          |

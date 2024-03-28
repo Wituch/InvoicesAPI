@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.RegularExpressions;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InvoicesAPI.Entities
 {
