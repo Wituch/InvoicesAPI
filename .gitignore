@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/InvoicesAPI.BDD/Features/Customers.feature.cs
+/InvoicesAPI.BDD/Features/Invoices.feature.cs

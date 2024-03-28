@@ -3,8 +3,6 @@ using InvoicesAPI.Entities;
 using InvoicesAPI.Infrastructure;
 using InvoicesAPI.Requests;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
-using NUnit.Framework;
 using System.Net.Http.Json;
 using TechTalk.SpecFlow.Assist;
 
@@ -42,21 +40,7 @@ namespace InvoicesAPI.BDD.StepDefinitions
         [StepDefinition("Following invoices are saved in the database:")]
         public void FollowingInvoicesAreSavedInTheDatabase(Table table)
         {
-            var invoices = table.CreateSet<Invoice>();
-            foreach (var invoice in invoices)
-            {
-                var invoiceInDb = _invoicesContext.Invoices.FirstOrDefault(i => i.InvoiceNumber == invoice.InvoiceNumber);
-                Assert.That(invoiceInDb, Is.Not.Null);
-                Assert.That(invoiceInDb.BuyerId, Is.EqualTo(invoice.BuyerId));
-                Assert.That(invoiceInDb.RecipientId, Is.EqualTo(invoice.RecipientId));
-                Assert.That(invoiceInDb.IssueDate, Is.EqualTo(invoice.IssueDate));
-                Assert.That(invoiceInDb.DeliveryDate, Is.EqualTo(invoice.DeliveryDate));
-                Assert.That(invoiceInDb.ItemDescription, Is.EqualTo(invoice.ItemDescription));
-                Assert.That(invoiceInDb.ItemQuantity, Is.EqualTo(invoice.ItemQuantity));
-                Assert.That(invoiceInDb.ItemPrice, Is.EqualTo(invoice.ItemPrice));
-                Assert.That(invoiceInDb.TaxRate, Is.EqualTo(invoice.TaxRate));
-                Assert.That(invoiceInDb.ItemValue, Is.EqualTo(invoice.ItemValue));
-            }
+            table.CompareToSet<Invoice>(_invoicesContext.Invoices);
         }
     }
 }

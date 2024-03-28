@@ -1,5 +1,9 @@
 ﻿Feature: Customers
 
+As a shop manager,
+I want to be able to browse and create customers,
+so I can issue invoices for them
+
 Scenario: Customer not found
 	Given There are no customers in the database
 	When Get customer request is sent with customer id 1daa55e3-b874-418d-9455-99ac9713652f
@@ -29,7 +33,7 @@ Scenario: Try to create a customer with duplicated identity number
 	| Field          | Value       |
 	| FirstName      | Jan         |
 	| LastName       | Kowalski    |
-	| IdentityNumber | 41121235715 |
+	| IdentityNumber | 41121235715 | 
 	| StreetNumber   | 6           |
 	| Street         | Sowia       |
 	| City           | Poznań      |

@@ -68,18 +68,7 @@ namespace InvoicesAPI.BDD.StepDefinitions
         [StepDefinition("Following customers are saved in the database:")]
         public void FollowingCustomersAreSavedInTheDatabase(Table table)
         {
-            var customers = table.CreateSet<Customer>();
-            foreach(var customer in customers)
-            {
-                var customerInDb = _invoicesContext.Customers.FirstOrDefault(c => c.IdentityNumber == customer.IdentityNumber);
-                Assert.That(customerInDb, Is.Not.Null);
-                Assert.That(customerInDb.FirstName, Is.EqualTo(customer.FirstName));
-                Assert.That(customerInDb.LastName, Is.EqualTo(customer.LastName));
-                Assert.That(customerInDb.StreetNumber, Is.EqualTo(customer.StreetNumber));
-                Assert.That(customerInDb.Street, Is.EqualTo(customer.Street));
-                Assert.That(customerInDb.City, Is.EqualTo(customer.City));
-                Assert.That(customerInDb.ZipCode, Is.EqualTo(customer.ZipCode));
-            }
+            table.CompareToSet<Customer>(_invoicesContext.Customers);
         }
 
         [Given("There are following customers in the database:")]
