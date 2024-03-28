@@ -1,9 +1,10 @@
-﻿using InvoicesAPI.BDD.Clients;
-using InvoicesAPI.Entities;
+﻿using InvoicesAPI.Entities;
 using InvoicesAPI.Infrastructure;
 using InvoicesAPI.Requests;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
+using System.Net.Http.Json;
 using TechTalk.SpecFlow.Assist;
 
 namespace InvoicesAPI.BDD.StepDefinitions
@@ -12,16 +13,15 @@ namespace InvoicesAPI.BDD.StepDefinitions
     public sealed class InvoicesStepDefinitions
     {
         private readonly InvoicesContext _invoicesContext;
-        private readonly InvoicesApiClient _apiClient;
         private readonly ScenarioContext _scenarioContext;
         private HttpResponseMessage _lastApiResponse;
+        private readonly WebApplicationFactory<Program> _factory;
 
-        public InvoicesStepDefinitions(InvoicesContext invoicesContext, InvoicesApiClient apiClient, ScenarioContext scenarioContext)
+        public InvoicesStepDefinitions(InvoicesContext invoicesContext, ScenarioContext scenarioContext, WebApplicationFactory<Program> factory)
         {
             _invoicesContext = invoicesContext;
-            _apiClient = apiClient;
-            _apiClient.SetBaseAdress("https://localhost:7277/");
             _scenarioContext = scenarioContext;
+            _factory = factory;
         }
 
         [Given("There are no invoices in the database")]
@@ -34,8 +34,9 @@ namespace InvoicesAPI.BDD.StepDefinitions
         [When("Create invoice request is sent with following properties:")]
         public async Task CreateInvoiceRequestIsSentWithFollowingProperties(Table table)
         {
+            var apiClient = _factory.CreateClient();
             var request = table.CreateInstance<CreateInvoiceRequest>();
-            _lastApiResponse = await _apiClient.CreateInvoice(request);
+            _lastApiResponse = await apiClient.PostAsJsonAsync("https://localhost:7277/invoices", request);
         }
 
         [Then("Last response status code is (.*)")]
