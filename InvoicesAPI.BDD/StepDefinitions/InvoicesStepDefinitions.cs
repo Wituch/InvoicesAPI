@@ -3,6 +3,7 @@ using InvoicesAPI.Entities;
 using InvoicesAPI.Infrastructure;
 using InvoicesAPI.Requests;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Json;
 using TechTalk.SpecFlow.Assist;
 
